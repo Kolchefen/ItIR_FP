@@ -165,8 +165,7 @@ class ReactiveController(Node):
                            or abs(key.angular.z) > 0.01))
 
         # PRIORITY 1: Halt
-        # Uses actual bumper now
-        if self.bumper_hit:
+        if front_min < 0.3:
             msg.linear.x = 0.0
             msg.angular.z = 0.0
             self.publish_cmd(msg)

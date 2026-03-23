@@ -37,6 +37,7 @@ srv/_*.py
 *.pyc
 qtcreator-*
 *.user
+turtlebot4_reactive_controller/__pycache__
 
 /planning/cfg
 /planning/docs
