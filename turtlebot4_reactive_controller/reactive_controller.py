@@ -73,14 +73,15 @@ class ReactiveController(Node):
             Twist, '/cmd_vel_key', self.key_callback, 10)
         self.odom_sub = self.create_subscription(
             Odometry, '/odom', self.odom_callback, sensor_qos)
-        
-        # Bumper state
-        self.bumper_hit = False
 
-        # Subscribe to Create 3 hazard detection
-        self.hazard_sub = self.create_subscription(
-            HazardDetectionVector, '/hazard_detection',
-            self.hazard_callback, sensor_qos)
+        # DONT WORK!        
+        # # Bumper state
+        # self.bumper_hit = False
+
+        # # Subscribe to Create 3 hazard detection
+        # self.hazard_sub = self.create_subscription(
+        #     HazardDetectionVector, '/hazard_detection',
+        #     self.hazard_callback, sensor_qos)
 
         # Publisher (Changed to use Stamped)
         self.cmd_pub = self.create_publisher(TwistStamped, '/cmd_vel', 10)
@@ -96,7 +97,7 @@ class ReactiveController(Node):
     def key_callback(self, msg):
         # Store the latest keyboard command and its timestamp.
         self.last_key_cmd = msg
-        self.key_time = self.get_clock().now()
+        self.key_time = self.get_clock().now()create_subscription
 
     def odom_callback(self, msg):
         # Accumulate distance traveled and track current yaw.
@@ -145,7 +146,7 @@ class ReactiveController(Node):
                 right_min = r
 
         front_min = min(left_min, right_min)
-        threshold = 0.5248  # 1 + bumper distance ft
+        threshold = 0.5048  # 1ft + bumper distance (.3048 m + .2 m) 
 
         # -- Manage escape, avoid, and wander timers --
         esc_active = self.escape_end is not None and now < self.escape_end
@@ -174,7 +175,7 @@ class ReactiveController(Node):
                            or abs(key.angular.z) > 0.01))
 
         # PRIORITY 1: Halt
-        if front_min < 0.127:
+        if front_min < 0.2:
             msg.linear.x = 0.0
             msg.angular.z = 0.0
             self.publish_cmd(msg)
@@ -193,18 +194,7 @@ class ReactiveController(Node):
             self.wander_dir = 0.0
             self.wander_end = None
 
-        # PRIORITY 3: Escape asymmetric obstacles within 1 ft
-        elif esc_active or (
-                front_min <= threshold
-                and abs(left_min - right_min) < 0.10):
-            if self.escape_end is None:
-                self.escape_dir = random.choice([-1.0, 1.0])
-                self.escape_end = now + rclpy.duration.Duration(seconds=3.5)
-                self.get_logger().info('Asymmetric obstacle detected')
-            msg.linear.x = 0.0
-            msg.angular.z = self.escape_dir * 0.8
-
-        # PRIORITY 4: Avoid symmetric obstacles within 1 ft (reflex)
+        # PRIORITY 3: Avoid symmetric obstacles within 1 ft (reflex)
         elif front_min <= threshold or avoid_active:
             if self.avoid_end is None:
                 self.avoid_dir = -1.0 if left_min < right_min else 1.0
@@ -215,6 +205,18 @@ class ReactiveController(Node):
                     self.get_logger().info('Obstacle on right')
             msg.linear.x = 0.0
             msg.angular.z = self.avoid_dir * 0.8
+
+
+        # PRIORITY 4: Escape asymmetric obstacles within 1 ft
+        elif esc_active or (
+                front_min <= threshold
+                and abs(left_min - right_min) < 0.10):
+            if self.escape_end is None:
+                self.escape_dir = random.choice([-1.0, 1.0])
+                self.escape_end = now + rclpy.duration.Duration(seconds=3.5)
+                self.get_logger().info('Asymmetric obstacle detected')
+            msg.linear.x = 0.0
+            msg.angular.z = self.escape_dir * 0.8
 
         # PRIORITY 5: Random turn every 1 ft
         elif wander_active or self.dist_since_turn >= 0.3048:
