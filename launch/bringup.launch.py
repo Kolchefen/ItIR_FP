@@ -17,7 +17,7 @@ Optional args:
 """
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import PathJoinSubstitution
@@ -78,11 +78,17 @@ def generate_launch_description():
         ),
     )
 
-    # == 4. Return Launch Description ==
+    # == 4. Delay controller so RViz2 and SLAM have time to start ==
+    delayed_controller = TimerAction(
+        period=15.0,  # seconds to wait
+        actions=[reactive_controller_node],
+    )
+
+    # == 5. Return Launch Description ==
     return LaunchDescription([
         use_sim_time_arg,
         sync_arg,
-        reactive_controller_node,
-        slam_launch,
         rviz_launch,
+        slam_launch,
+        delayed_controller,
     ])

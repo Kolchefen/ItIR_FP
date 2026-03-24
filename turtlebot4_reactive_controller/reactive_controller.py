@@ -55,6 +55,10 @@ class ReactiveController(Node):
         self.avoid_dir = 0.0
         self.avoid_end = None
 
+        # Random-turn state
+        self.wander_dir = 0.0
+        self.wander_end = None
+
         # QoS profile to match BEST_EFFORT sensor publishers
         sensor_qos = QoSProfile(
             depth=10,
@@ -143,7 +147,7 @@ class ReactiveController(Node):
         front_min = min(left_min, right_min)
         threshold = 0.5248  # 1 + bumper distance ft
 
-        # -- Manage escape and avoid timers --
+        # -- Manage escape, avoid, and wander timers --
         esc_active = self.escape_end is not None and now < self.escape_end
         if self.escape_end is not None and now >= self.escape_end:
             self.escape_end = None
@@ -157,6 +161,11 @@ class ReactiveController(Node):
 
         avoid_active = self.avoid_end is not None
 
+        wander_active = self.wander_end is not None and now < self.wander_end
+        if self.wander_end is not None and now >= self.wander_end:
+            self.wander_end = None
+            self.wander_dir = 0.0
+
         # Check if keyboard input is recent enough
         key_age = (now - self.key_time).nanoseconds * 1e-9
         key = self.last_key_cmd
@@ -165,7 +174,7 @@ class ReactiveController(Node):
                            or abs(key.angular.z) > 0.01))
 
         # PRIORITY 1: Halt
-        if front_min < 0.3:
+        if front_min < 0.127:
             msg.linear.x = 0.0
             msg.angular.z = 0.0
             self.publish_cmd(msg)
@@ -181,19 +190,21 @@ class ReactiveController(Node):
             self.halted = False
             self.avoid_dir = 0.0
             self.avoid_end = None
+            self.wander_dir = 0.0
+            self.wander_end = None
 
-        # PRIORITY 3: Escape symmetric obstacles within 1 ft
+        # PRIORITY 3: Escape asymmetric obstacles within 1 ft
         elif esc_active or (
                 front_min <= threshold
                 and abs(left_min - right_min) < 0.10):
             if self.escape_end is None:
                 self.escape_dir = random.choice([-1.0, 1.0])
                 self.escape_end = now + rclpy.duration.Duration(seconds=3.5)
-                self.get_logger().info('Symmetric obstacle detected')
+                self.get_logger().info('Asymmetric obstacle detected')
             msg.linear.x = 0.0
             msg.angular.z = self.escape_dir * 0.8
 
-        # PRIORITY 4: Avoid asymmetric obstacles within 1 ft (reflex)
+        # PRIORITY 4: Avoid symmetric obstacles within 1 ft (reflex)
         elif front_min <= threshold or avoid_active:
             if self.avoid_end is None:
                 self.avoid_dir = -1.0 if left_min < right_min else 1.0
@@ -206,11 +217,18 @@ class ReactiveController(Node):
             msg.angular.z = self.avoid_dir * 0.8
 
         # PRIORITY 5: Random turn every 1 ft
-        elif self.dist_since_turn >= threshold:
-            delta = random.uniform(-math.radians(15), math.radians(15))
+        elif wander_active or self.dist_since_turn >= 0.3048:
+            if self.wander_end is None:
+                delta = random.uniform(-15, 15)
+                angular_speed = 0.5  # rad/s
+                duration = abs(math.radians(delta)) / angular_speed
+                duration = max(duration, 0.3)  # minimum turn time
+                self.wander_dir = 1.0 if delta >= 0 else -1.0 # Decide if positive or negative turn
+                self.wander_end = now + rclpy.duration.Duration(seconds=duration)
+                self.dist_since_turn = 0.0
+                self.get_logger().info(f'Wandering by: {delta:.1f} deg for {duration:.2f}s')
             msg.linear.x = 0.0
-            msg.angular.z = max(-1.5, min(1.5, delta / 0.1))
-            self.dist_since_turn = 0.0
+            msg.angular.z = self.wander_dir * 0.5
 
         # PRIORITY 6: Drive forward
         else:
