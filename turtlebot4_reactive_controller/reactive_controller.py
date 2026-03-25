@@ -149,6 +149,8 @@ class ReactiveController(Node):
         threshold = 0.5048  # 1ft + bumper distance (.3048 m + .2 m) 
 
         # -- Manage escape, avoid, and wander timers --
+        # These ensure subsumption behaviors are followed through based on distance
+        # that is decided be those linear and angular distances, clock, and speed.
         esc_active = self.escape_end is not None and now < self.escape_end
         if self.escape_end is not None and now >= self.escape_end:
             self.escape_end = None
@@ -206,7 +208,6 @@ class ReactiveController(Node):
             msg.linear.x = 0.0
             msg.angular.z = self.avoid_dir * 0.8
 
-
         # PRIORITY 4: Escape asymmetric obstacles within 1 ft
         elif esc_active or (
                 front_min <= threshold
@@ -226,7 +227,7 @@ class ReactiveController(Node):
                 duration = abs(math.radians(delta)) / angular_speed
                 duration = max(duration, 0.3)  # minimum turn time
                 self.wander_dir = 1.0 if delta >= 0 else -1.0 # Decide if positive or negative turn
-                self.wander_end = now + rclpy.duration.Duration(seconds=duration)
+                self.wander_end = now + rclpy.duration.Duration(seconds=duration) # Calculated time to stop 
                 self.dist_since_turn = 0.0
                 self.get_logger().info(f'Wandering by: {delta:.1f} deg for {duration:.2f}s')
             msg.linear.x = 0.0
