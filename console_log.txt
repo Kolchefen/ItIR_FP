@@ -1,0 +1,202 @@
+lill0017@robotics10:~/final_proj$ ros2 launch turtlebot4_reactive_controller bringup.launch.py 
+[INFO] [launch]: All log files can be found below /home/lill0017/.ros/log/2026-04-14-19-39-42-420796-robotics10-143006
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [map_server-1]: process started with pid [143009]
+[INFO] [amcl-2]: process started with pid [143010]
+[INFO] [lifecycle_manager-3]: process started with pid [143011]
+[INFO] [controller_server-4]: process started with pid [143012]
+[INFO] [smoother_server-5]: process started with pid [143013]
+[INFO] [planner_server-6]: process started with pid [143014]
+[INFO] [behavior_server-7]: process started with pid [143015]
+[INFO] [bt_navigator-8]: process started with pid [143016]
+[INFO] [waypoint_follower-9]: process started with pid [143017]
+[INFO] [velocity_smoother-10]: process started with pid [143018]
+[INFO] [lifecycle_manager-11]: process started with pid [143021]
+[lifecycle_manager-3] [INFO] [1776195582.534470539] [lifecycle_manager_localization]: Creating
+[planner_server-6] [INFO] [1776195582.537457763] [planner_server]: 
+[planner_server-6] 	planner_server lifecycle node launched. 
+[planner_server-6] 	Waiting on external lifecycle transitions to activate
+[planner_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-6] [INFO] [1776195582.538405180] [planner_server]: Creating
+[lifecycle_manager-3] [INFO] [1776195582.537917812] [lifecycle_manager_localization]: Creating and initializing lifecycle service clients
+[controller_server-4] [INFO] [1776195582.541629213] [controller_server]: 
+[controller_server-4] 	controller_server lifecycle node launched. 
+[controller_server-4] 	Waiting on external lifecycle transitions to activate
+[controller_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1776195582.545093354] [controller_server]: Creating controller server
+[bt_navigator-8] [INFO] [1776195582.546809951] [bt_navigator]: 
+[bt_navigator-8] 	bt_navigator lifecycle node launched. 
+[bt_navigator-8] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-8] [INFO] [1776195582.548780539] [bt_navigator]: Creating
+[planner_server-6] [INFO] [1776195582.548975303] [global_costmap.global_costmap]: 
+[planner_server-6] 	global_costmap lifecycle node launched. 
+[planner_server-6] 	Waiting on external lifecycle transitions to activate
+[planner_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-6] [INFO] [1776195582.549273937] [global_costmap.global_costmap]: Creating Costmap
+[behavior_server-7] [INFO] [1776195582.550261469] [behavior_server]: 
+[velocity_smoother-10] [INFO] [1776195582.550266444] [velocity_smoother]: 
+[velocity_smoother-10] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-10] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1776195582.550654577] [local_costmap.local_costmap]: 
+[controller_server-4] 	local_costmap lifecycle node launched. 
+[controller_server-4] 	Waiting on external lifecycle transitions to activate
+[controller_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1776195582.550891205] [local_costmap.local_costmap]: Creating Costmap
+[behavior_server-7] 	behavior_server lifecycle node launched. 
+[behavior_server-7] 	Waiting on external lifecycle transitions to activate
+[behavior_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-5] [INFO] [1776195582.553231233] [smoother_server]: 
+[smoother_server-5] 	smoother_server lifecycle node launched. 
+[smoother_server-5] 	Waiting on external lifecycle transitions to activate
+[smoother_server-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-5] [INFO] [1776195582.554366639] [smoother_server]: Creating smoother server
+[amcl-2] [INFO] [1776195582.559153914] [amcl]: 
+[amcl-2] 	amcl lifecycle node launched. 
+[amcl-2] 	Waiting on external lifecycle transitions to activate
+[amcl-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[amcl-2] [INFO] [1776195582.559450286] [amcl]: Creating
+[lifecycle_manager-11] [INFO] [1776195582.559596448] [lifecycle_manager_navigation]: Creating
+[map_server-1] [INFO] [1776195582.561439545] [map_server]: 
+[map_server-1] 	map_server lifecycle node launched. 
+[map_server-1] 	Waiting on external lifecycle transitions to activate
+[map_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-1] [INFO] [1776195582.561533135] [map_server]: Creating
+[lifecycle_manager-11] [INFO] [1776195582.562054491] [lifecycle_manager_navigation]: Creating and initializing lifecycle service clients
+[waypoint_follower-9] [INFO] [1776195582.563724701] [waypoint_follower]: 
+[waypoint_follower-9] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-9] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-9] [INFO] [1776195582.563980295] [waypoint_follower]: Creating
+[lifecycle_manager-3] [INFO] [1776195584.539156737] [lifecycle_manager_localization]: Waiting for service map_server/get_state...
+[lifecycle_manager-11] [INFO] [1776195584.562918259] [lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[INFO] [rviz2-12]: process started with pid [143168]
+[rviz2-12] [INFO] [1776195585.781366107] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-12] [INFO] [1776195585.781411734] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-12] [INFO] [1776195585.794647974] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-12] [INFO] [1776195585.871367791] [rviz]: Subscribing to: /mobile_base/sensors/bumper_pointcloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.871623295] [rviz]: Subscribing to: /mobile_base/sensors/bumper_pointcloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.889809463] [rviz]: Subscribing to: /local_costmap/voxel_marked_cloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.893529952] [rviz]: Subscribing to: /global_costmap/voxel_marked_cloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.898926612] [rviz]: Subscribing to: /mobile_base/sensors/bumper_pointcloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.900577443] [rviz]: Subscribing to: /local_costmap/voxel_marked_cloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.901634125] [rviz]: Subscribing to: /global_costmap/voxel_marked_cloud
+[rviz2-12] 
+[rviz2-12] [INFO] [1776195585.925284902] [nav2_rviz_selector_node]: Trying to load plugins...
+[lifecycle_manager-3] [INFO] [1776195586.539389599] [lifecycle_manager_localization]: Waiting for service map_server/get_state...
+[lifecycle_manager-11] [INFO] [1776195586.563127886] [lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[rviz2-12] [INFO] [1776195586.927344383] [nav2_rviz_selector_node]: controller_server service not available
+[rviz2-12] [INFO] [1776195587.942230626] [nav2_rviz_selector_node]: planner_server service not available
+[lifecycle_manager-3] [INFO] [1776195588.539599611] [lifecycle_manager_localization]: Waiting for service map_server/get_state...
+[lifecycle_manager-11] [INFO] [1776195588.563380834] [lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[rviz2-12] [INFO] [1776195588.958278486] [nav2_rviz_selector_node]: controller_server service not available
+[rviz2-12] [INFO] [1776195589.974144285] [nav2_rviz_selector_node]: smoother_server service not available
+[lifecycle_manager-3] [INFO] [1776195590.539913785] [lifecycle_manager_localization]: Waiting for service map_server/get_state...
+[lifecycle_manager-11] [INFO] [1776195590.563761629] [lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[rviz2-12] [INFO] [1776195590.990314449] [nav2_rviz_selector_node]: controller_server service not available
+[rviz2-12] [INFO] [1776195591.000212269] [nav2_rviz_selector_node]: Failed to load plugins. Retrying...
+[rviz2-12] [INFO] [1776195591.000309868] [nav2_rviz_selector_node]: Trying to load plugins...
+[rviz2-12] [INFO] [1776195592.008827813] [nav2_rviz_selector_node]: controller_server service not available
+[lifecycle_manager-3] [INFO] [1776195592.323670272] [lifecycle_manager_localization]: Starting managed nodes bringup...
+[lifecycle_manager-3] [INFO] [1776195592.323763553] [lifecycle_manager_localization]: Configuring map_server
+[map_server-1] [INFO] [1776195592.324648527] [map_server]: Configuring
+[map_server-1] [INFO] [1776195592.324775388] [map_io]: Loading yaml file: /home/lill0017/final_proj/area_map/map_area.yaml
+[map_server-1] [INFO] [1776195592.325428889] [map_io]: resolution: 0.05
+[map_server-1] [INFO] [1776195592.325458975] [map_io]: origin[0]: -6.449
+[map_server-1] [INFO] [1776195592.325472889] [map_io]: origin[1]: -1.399
+[map_server-1] [INFO] [1776195592.325483480] [map_io]: origin[2]: 0
+[map_server-1] [INFO] [1776195592.325494087] [map_io]: free_thresh: 0.196
+[map_server-1] [INFO] [1776195592.325503825] [map_io]: occupied_thresh: 0.65
+[map_server-1] [INFO] [1776195592.325515696] [map_io]: mode: trinary
+[map_server-1] [INFO] [1776195592.325526559] [map_io]: negate: 0
+[map_server-1] [INFO] [1776195592.325930572] [map_io]: Loading image_file: /home/lill0017/final_proj/area_map/map_area.pgm
+[map_server-1] [INFO] [1776195592.327188244] [map_io]: Read map /home/lill0017/final_proj/area_map/map_area.pgm: 165 X 96 map @ 0.05 m/cell
+[map_server-1] [WARN] [1776195592.450493329] [map_server.rclcpp]: failed to send response to /map_server/change_state (timeout): client will not receive response, at ./src/rmw_response.cpp:153, at ./src/rcl/service.c:400
+[rviz2-12] [INFO] [1776195593.024263885] [nav2_rviz_selector_node]: planner_server service not available
+[rviz2-12] [INFO] [1776195594.044428319] [nav2_rviz_selector_node]: controller_server service not available
+[lifecycle_manager-11] [INFO] [1776195594.075827118] [lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[rviz2-12] [INFO] [1776195595.063698296] [nav2_rviz_selector_node]: smoother_server service not available
+[lifecycle_manager-11] [INFO] [1776195596.076264372] [lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[rviz2-12] [INFO] [1776195596.081566637] [nav2_rviz_selector_node]: controller_server service not available
+[rviz2-12] [INFO] [1776195596.092107759] [nav2_rviz_selector_node]: Failed to load plugins. Retrying...
+[rviz2-12] [INFO] [1776195596.092211167] [nav2_rviz_selector_node]: Trying to load plugins...
+[rviz2-12] [INFO] [1776195597.102036547] [nav2_rviz_selector_node]: controller_server service not available
+[lifecycle_manager-11] [INFO] [1776195598.076547406] [lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-11] [INFO] [1776195599.007400533] [lifecycle_manager_navigation]: Starting managed nodes bringup...
+[lifecycle_manager-11] [INFO] [1776195599.007479599] [lifecycle_manager_navigation]: Configuring controller_server
+[controller_server-4] [INFO] [1776195599.008358954] [controller_server]: Configuring controller interface
+[controller_server-4] [INFO] [1776195599.008395145] [controller_server]: getting progress checker plugins..
+[controller_server-4] [INFO] [1776195599.008836632] [controller_server]: getting goal checker plugins..
+[controller_server-4] [INFO] [1776195599.009196324] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-4] [INFO] [1776195599.009259866] [local_costmap.local_costmap]: Configuring
+[controller_server-4] [INFO] [1776195599.022031114] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-4] [INFO] [1776195599.029175910] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-4] [INFO] [1776195599.044708841] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-4] [INFO] [1776195599.044731783] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-4] [INFO] [1776195599.045544844] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-4] [INFO] [1776195599.058345721] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-4] [INFO] [1776195599.058753334] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-4] [INFO] [1776195599.059302029] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-4] [INFO] [1776195599.059751315] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-4] [INFO] [1776195599.060923343] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-4] [INFO] [1776195599.064354877] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-4] [INFO] [1776195599.066160984] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-4] [INFO] [1776195599.066183400] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-4] [INFO] [1776195599.067556314] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on circular cost.
+[controller_server-4] [INFO] [1776195599.067570193] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-4] [INFO] [1776195599.068185757] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-4] [INFO] [1776195599.068200073] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-4] [INFO] [1776195599.068754321] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-4] [INFO] [1776195599.068767586] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-4] [INFO] [1776195599.070056709] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 14.000000 weight
+[controller_server-4] [INFO] [1776195599.070073011] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-4] [INFO] [1776195599.070836376] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-4] [INFO] [1776195599.071909766] [controller_server]: PathAngleCritic instantiated with 1 power and 2.000000 weight. Mode set to: Forward Preference
+[controller_server-4] [INFO] [1776195599.071932835] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-4] [INFO] [1776195599.072582336] [controller_server]: PreferForwardCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-4] [INFO] [1776195599.072609510] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-4] [INFO] [1776195599.074328492] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1776195599.078679277] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-4] [INFO] [1776195599.078725852] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-11] [INFO] [1776195599.085949732] [lifecycle_manager_navigation]: Configuring smoother_server
+[smoother_server-5] [INFO] [1776195599.086175865] [smoother_server]: Configuring smoother server
+[smoother_server-5] [INFO] [1776195599.099063412] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-5] [INFO] [1776195599.100002737] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-11] [INFO] [1776195599.105198172] [lifecycle_manager_navigation]: Configuring planner_server
+[planner_server-6] [WARN] [1776195600.940756848] [planner_server.rclcpp]: failed to send response to /planner_server/get_parameters (timeout): client will not receive response, at ./src/rmw_response.cpp:153, at ./src/rcl/service.c:400
+[planner_server-6] [INFO] [1776195600.941274135] [planner_server]: Configuring
+[planner_server-6] [INFO] [1776195600.941330739] [global_costmap.global_costmap]: Configuring
+[planner_server-6] [INFO] [1776195600.971331304] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-6] [INFO] [1776195600.980064325] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-6] [INFO] [1776195600.982676436] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-6] [INFO] [1776195600.982700602] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-6] [INFO] [1776195600.984147889] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-6] [INFO] [1776195600.989732891] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-6] [INFO] [1776195600.989758032] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-6] [INFO] [1776195600.990895381] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-6] [INFO] [1776195601.014376363] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner::NavfnPlanner
+[planner_server-6] [INFO] [1776195601.014399323] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-6] [INFO] [1776195601.015342783] [planner_server]: Planner Server has GridBased  planners available.
+[planner_server-6] [WARN] [1776195601.126365107] [planner_server.rclcpp]: failed to send response to /planner_server/change_state (timeout): client will not receive response, at ./src/rmw_response.cpp:153, at ./src/rcl/service.c:400
+[rviz2-12] [INFO] [1776195602.543895889] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195601.226 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195602.672004722] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195601.361 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195602.799547605] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195601.478 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195602.927609014] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195601.619 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.056541375] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195601.737 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.183591272] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195601.872 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.311864256] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.009 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.440267672] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.142 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.600523528] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.263 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.696033790] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.389 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.824371969] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.521 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195603.951889915] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.658 for reason 'discarding message because the queue is full'
+[rviz2-12] [INFO] [1776195604.111701930] [rviz]: Message Filter dropping message: frame 'rplidar_link' at time 1776195602.781 for reason 'discarding message because the queue is full'
+
+And then it repeats forever
