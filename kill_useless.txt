@@ -1,0 +1,15 @@
+lill0017@robotics10:~/final_proj$ pgrep -af 'ros2|rclcpp|component_container|rviz|turtlebot|rplidar|nav2|amcl|controller_server|planner_server|bt_navigator|lifecycle_manager'
+99945 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 5 --rmw-implementation rmw_fastrtps_cpp
+101406 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 3 --rmw-implementation rmw_fastrtps_cpp
+105018 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 4 --rmw-implementation rmw_fastrtps_cpp
+
+lill0017@robotics10:~/final_proj$ pkill -f 'ros2cli.daemon'
+sleep 1
+pgrep -af 'ros2cli.daemon'   
+
+lill0017@robotics10:~/final_proj$ ../echo-ros.sh 
+4
+;;;;10.194.16.39:11811;
+True
+
+lill0017@robotics10:~/final_proj$ pgrep -af 'ros2|rclcpp|component_container|rviz|turtlebot|rplidar|nav2|amcl|controller_server|planner_server|bt_navigator|lifecycle_manager'

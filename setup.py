@@ -30,6 +30,8 @@ setup(
     entry_points={
         'console_scripts': [
             'reactive_controller = turtlebot4_reactive_controller.reactive_controller:main',
+            'tsp_executor = turtlebot4_reactive_controller.tsp_executor:main',
+            'face_detector = turtlebot4_reactive_controller.face_detector:main',
         ],
     },
 )
