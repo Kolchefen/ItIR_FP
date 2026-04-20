@@ -55,7 +55,7 @@ class DStarLite:
         # seed the search from the goal (D* Lite searches backwards from goal to start)
         self._push(goal)
 
-    # ---- public API -------------------------------------------------------
+    # API 
 
     def compute_shortest_path(self) -> bool:
         """Focused search; returns True if a finite path to `start` exists."""
@@ -103,7 +103,7 @@ class DStarLite:
                 return []
         return path
 
-    # ---- algorithm internals ---------------------------------------------
+    # algorithm internals 
 
     def _h(self, a: tuple[int, int], b: tuple[int, int]) -> float:
         # octile distance (admissible for 8-connected unit grid)
