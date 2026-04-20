@@ -38,14 +38,15 @@ from turtlebot4_reactive_controller.waypoints import WAYPOINTS, Waypoint
 ROBOT_RADIUS_M = 0.18  # TurtleBot 4 footprint radius (approx)
 
 # every half meter the robot stops and looks for a face (can change via ROS param)
-FACE_CHECK_DEFAULT_M = 0.5            # ~20 inches; override with ROS param
+FACE_CHECK_DEFAULT_M = .5           # ~20 inches; override with ROS param
 FACE_TOPIC_DEFAULT = '/face_detected'  # published by face_detector node
-CMD_VEL_TOPIC_DEFAULT = '/cmd_vel_unstamped'   # Create 3 expects Twist here
+CMD_VEL_TOPIC_DEFAULT = '/cmd_vel_unstamped'   # Create 3 expects Twist here, only used for 
+                                               # face reaction, other movements handled by Nav2
 ROTATE_SPEED_RAD_S = 0.8    # how fast we spin during the 180 turn (rad/s)
 ROTATE_TIMEOUT_S = 15.0     # give up spinning after 15s so we don't get stuck forever
 FIRST_LOOK_TIMEOUT_S = 3.0  # wait 3s for a face before giving up and beeping
 BEEP_INTERVAL_S = 1.0       # beep every second until someone shows up
-BEEP_FREQ_HZ = 880          # A5 note, pretty annoying, that's the point
+BEEP_FREQ_HZ = 880          # annoying note
 BEEP_DURATION_MS = 200      # short beep so it doesn't sound like a flatline
 
 
@@ -284,7 +285,7 @@ class TSPExecutor(Node):
             )
 
         # Brute-force: start is fixed at index 0; permute the remaining 1..n-1.
-        # yeah it's O(n!) but n=4 means only 24 permutations, totally fine
+        # It's O(n!) but n=4 means only 24 permutations, so whatever
         wp_indices = list(range(1, n))
         best_perm, best_cost = None, INF
         for perm in itertools.permutations(wp_indices):
