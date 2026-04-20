@@ -3,7 +3,7 @@
 # Face detector node.
 # Subscribes to the TurtleBot 4's OAK-D color stream, runs an OpenCV Haar
 # cascade face detector on each frame, and publishes a debounced Bool flag
-# to /face_detected for the reactive controller to consume.
+# to /face_detected for the reactive controller to use.
 #
 # Intended to run on a laptop (not the Pi) so the detector doesn't steal
 # CPU from Nav2 / MPPI on the robot. Only the image stream comes in and a
