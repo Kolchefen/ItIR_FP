@@ -323,7 +323,7 @@ class TSPExecutor(Node):
             goal.pose.pose.position.x = wp.x
             goal.pose.pose.position.y = wp.y
             goal.pose.pose.orientation.w = 1.0
-            self.get_logger().info(f'→ {wp.name}  ({wp.x:.2f}, {wp.y:.2f})')
+            self.get_logger().info(f'-> {wp.name}  ({wp.x:.2f}, {wp.y:.2f})')
 
             # send the goal and block until Nav2 accepts (or rejects) it
             send_fut = self.nav_client.send_goal_async(goal)
