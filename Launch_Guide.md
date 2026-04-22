@@ -4,8 +4,8 @@ How to build and run the `turtlebot4_reactive_controller` package.
 
 ## Prerequisites
 
-- ROS 2 workspace rooted at `~/final_proj`
-- Map file at `/home/lill0017/final_proj/area_map/map_area.yaml`
+- ROS 2 workspace rooted at `~/proj`
+- Map file at `~/area_map/map_area.yaml`
 - All terminals must source the workspace overlay:
   ```bash
   source install/setup.bash
@@ -13,7 +13,7 @@ How to build and run the `turtlebot4_reactive_controller` package.
 
 ## 1. Build
 
-From `~/final_proj`:
+From `~/proj`:
 
 ```bash
 colcon build --packages-select turtlebot4_reactive_controller --symlink-install
@@ -26,14 +26,14 @@ source install/setup.bash
 
 ```bash
 ros2 launch turtlebot4_reactive_controller bringup.launch.py \
-    map:=/home/lill0017/final_proj/area_map/map_area.yaml
+    map:=~/proj/area_map/map_area.yaml
 ```
 
 Optional launch args:
 
 | Arg            | Default                                               | When to change                          |
 | -------------- | ----------------------------------------------------- | --------------------------------------- |
-| `map`          | `/home/lill0017/final_proj/area_map/map_area.yaml`    | Different map                           |
+| `map`          | `/area_map/map_area.yaml`                             | Different map                           |
 | `use_sim_time` | `false`                                               | Set `true` when running in simulation   |
 | `use_rviz`     | `true`                                                | Set `false` on the Pi with no display   |
 
