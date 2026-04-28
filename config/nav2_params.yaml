@@ -107,18 +107,18 @@ controller_server:
       time_steps: 56
       model_dt: 0.1
       batch_size: 2000
-      ax_max: 3.0
-      ax_min: -3.0
+      ax_max: 1.0
+      ax_min: -1.0
       ay_max: 3.0
       ay_min: -3.0
       az_max: 3.5
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.4
-      vx_max: 0.5
-      vx_min: -0.35
+      vx_max: 0.15
+      vx_min: -0.10
       vy_max: 0.5
-      wz_max: 1.9
+      wz_max: 1.0
       iteration_count: 1
       prune_distance: 1.7
       transform_tolerance: 5.0
@@ -188,10 +188,6 @@ controller_server:
         threshold_to_consider: 0.5
         max_angle_to_furthest: 1.0
         mode: 0
-      # TwirlingCritic:
-      #   enabled: true
-      #   twirling_cost_power: 1
-      #   twirling_cost_weight: 10.0
 
 local_costmap:
   local_costmap:
@@ -268,13 +264,6 @@ global_costmap:
         cost_scaling_factor: 3.0
         inflation_radius: 0.7
       always_send_full_costmap: True
-
-# The yaml_filename does not need to be specified since it going to be set by defaults in launch.
-# If you'd rather set it in the yaml, remove the default "map" value in the tb3_simulation_launch.py
-# file & provide full path to map below. If CLI map configuration or launch default is provided, that will be used.
-# map_server:
-#   ros__parameters:
-#     yaml_filename: ""
 
 map_saver:
   ros__parameters:
@@ -416,10 +405,10 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: False
     feedback: "OPEN_LOOP"
-    max_velocity: [0.5, 0.0, 2.0]
+    max_velocity: [0.15, 0.0, 1.0]
     min_velocity: [-0.5, 0.0, -2.0]
-    max_accel: [2.5, 0.0, 3.2]
-    max_decel: [-2.5, 0.0, -3.2]
+    max_accel: [1.0, 0.0, 2.0]
+    max_decel: [-1.0, 0.0, -2.0]
     odom_topic: "odom"
     odom_duration: 0.1
     deadband_velocity: [0.0, 0.0, 0.0]

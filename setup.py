@@ -19,7 +19,7 @@ setup(
         (os.path.join('share', package_name, 'config'),
             glob(os.path.join('config', '*.yaml'))),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'numpy<2', 'opencv-python'],
     zip_safe=True,
     maintainer='Zachary Lilley, Javier Zertuche, Leslie Kelih',
     maintainer_email='zacharydlilley@ou.edu',

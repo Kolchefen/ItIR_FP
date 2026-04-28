@@ -42,7 +42,7 @@ FACE_CHECK_DEFAULT_M = .5           # ~20 inches; override with ROS param
 FACE_TOPIC_DEFAULT = '/face_detected'  # published by face_detector node
 CMD_VEL_TOPIC_DEFAULT = '/cmd_vel_unstamped'   # Create 3 expects Twist here, only used for 
                                                # face reaction, other movements handled by Nav2
-ROTATE_SPEED_RAD_S = 0.8    # how fast we spin during the 180 turn (rad/s)
+ROTATE_SPEED_RAD_S = 0.2    # how fast we spin during the 180 turn (rad/s)
 ROTATE_TIMEOUT_S = 15.0     # give up spinning after 15s so we don't get stuck forever
 FIRST_LOOK_TIMEOUT_S = 3.0  # wait 3s for a face before giving up and beeping
 BEEP_INTERVAL_S = 1.0       # beep every second until someone shows up
@@ -300,7 +300,7 @@ class TSPExecutor(Node):
         if best_perm is None or best_cost >= INF:
             raise RuntimeError('no feasible tour, one or more legs unreachable')
 
-        order = [nodes[i] for i in best_perm]
+        order = [nodes[i] for i in best_perm] # copy best order
         order_names = ' -> '.join(['START'] + [w.name for w in order])
         self.get_logger().info(
             f'best tour: {order_names}  (total cost = {best_cost:.2f} cells)'
@@ -317,51 +317,51 @@ class TSPExecutor(Node):
             self._distance_since_check = 0.0  # reset odometer for this leg
 
             # build the Nav2 goal message - orientation.w=1 means "don't care about heading"
-            goal = NavigateToPose.Goal()
-            goal.pose.header.frame_id = 'map'
-            goal.pose.header.stamp = self.get_clock().now().to_msg()
-            goal.pose.pose.position.x = wp.x
-            goal.pose.pose.position.y = wp.y
-            goal.pose.pose.orientation.w = 1.0
+            nav_goal = NavigateToPose.Goal()
+            nav_goal.pose.header.frame_id = 'map'
+            nav_goal.pose.header.stamp = self.get_clock().now().to_msg()
+            nav_goal.pose.pose.position.x = wp.x
+            nav_goal.pose.pose.position.y = wp.y
+            nav_goal.pose.pose.orientation.w = 1.0
             self.get_logger().info(f'-> {wp.name}  ({wp.x:.2f}, {wp.y:.2f})')
 
             # send the goal and block until Nav2 accepts (or rejects) it
-            send_fut = self.nav_client.send_goal_async(goal)
-            rclpy.spin_until_future_complete(self, send_fut)
-            handle = send_fut.result()
-            if not handle or not handle.accepted:
+            goal_acceptance_future = self.nav_client.send_goal_async(nav_goal)
+            rclpy.spin_until_future_complete(self, goal_acceptance_future)
+            goal_handle = goal_acceptance_future.result()
+            if not goal_handle or not goal_handle.accepted:
                 self.get_logger().error(f'goal {wp.name} rejected by Nav2')
                 return False
 
             # now poll in a loop - we need to check distance every 100ms
-            result_fut = handle.get_result_async()
-            interrupted = False
-            while rclpy.ok() and not result_fut.done():
-                rclpy.spin_once(self, timeout_sec=0.1)
+            nav_result_future = goal_handle.get_result_async()
+            interrupted_for_face_check = False
+            while rclpy.ok() and not nav_result_future.done():
+                rclpy.spin_once(self, timeout_sec=0.1) # Process subscriptions once
                 if self._distance_since_check >= self.face_check_distance_m:
                     self.get_logger().info(
                         f'  {wp.name}: {self._distance_since_check:.2f} m '
                         f'traveled, cancelling for face check'
                     )
                     # cancel the current nav goal so we can spin in place
-                    cancel_fut = handle.cancel_goal_async()
-                    rclpy.spin_until_future_complete(self, cancel_fut)
-                    rclpy.spin_until_future_complete(self, result_fut)
-                    interrupted = True
+                    cancel_ack_future = goal_handle.cancel_goal_async()
+                    rclpy.spin_until_future_complete(self, cancel_ack_future)
+                    rclpy.spin_until_future_complete(self, nav_result_future)
+                    interrupted_for_face_check = True
                     break
 
-            if interrupted:
+            if interrupted_for_face_check:
                 self._face_check()
                 continue  # re-send same goal; Nav2 replans from new pose
 
-            status = result_fut.result().status
+            final_status = nav_result_future.result().status
             # 4 == STATUS_SUCCEEDED (action_msgs/GoalStatus)
-            ok = status == 4
+            reached_waypoint = final_status == 4 # 4 is STATUS_SUCCEEDED
             self.get_logger().info(
-                f'  {wp.name} finished status={status} '
-                f'({"OK" if ok else "FAIL"})'
+                f'  {wp.name} finished status={final_status} '
+                f'({"OK" if reached_waypoint else "FAIL"})'
             )
-            return ok
+            return reached_waypoint
         return False
 
 
@@ -370,12 +370,12 @@ def main():
     node = TSPExecutor()
     try:
         # spin until we have a map AND know where we are - can't plan without both
-        node.get_logger().info('waiting for /map and /amcl_pose …')
+        node.get_logger().info('waiting for /map and /amcl_pose ...')
         while rclpy.ok() and (node.obstacles is None or node.current_pose is None):
             rclpy.spin_once(node, timeout_sec=0.5)
 
         # Nav2 might still be booting up, wait for the action server to be ready
-        node.get_logger().info('waiting for /navigate_to_pose action server …')
+        node.get_logger().info('waiting for /navigate_to_pose action server ...')
         node.nav_client.wait_for_server()
 
         # solve TSP then drive the tour in order

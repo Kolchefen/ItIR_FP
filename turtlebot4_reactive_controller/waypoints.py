@@ -22,6 +22,17 @@ WAYPOINTS: tuple[Waypoint, ...] = (
     Waypoint(name="D", x=0.53733891248703, y=0.7723487019538879),
 )
 
+# testing start point
+# header:
+#   stamp:
+#     sec: 1776968191
+#     nanosec: 653186892
+#   frame_id: map
+# point:
+#   x: -2.622009038925171
+#   y: 1.1345819234848022
+#   z: 0.004547119140625
+
 
 def by_name(name: str) -> Waypoint:
     for wp in WAYPOINTS:
