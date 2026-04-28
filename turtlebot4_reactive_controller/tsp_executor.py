@@ -38,7 +38,7 @@ from turtlebot4_reactive_controller.waypoints import WAYPOINTS, Waypoint
 ROBOT_RADIUS_M = 0.18  # TurtleBot 4 footprint radius (approx)
 
 # every half meter the robot stops and looks for a face (can change via ROS param)
-FACE_CHECK_DEFAULT_M = .5           # ~20 inches; override with ROS param
+FACE_CHECK_DEFAULT_M = 1.2           # ~20 inches; override with ROS param
 FACE_TOPIC_DEFAULT = '/face_detected'  # published by face_detector node
 CMD_VEL_TOPIC_DEFAULT = '/cmd_vel_unstamped'   # Create 3 expects Twist here, only used for 
                                                # face reaction, other movements handled by Nav2
@@ -234,6 +234,7 @@ class TSPExecutor(Node):
             self._beep()
             if self._wait_for_face(BEEP_INTERVAL_S):
                 self.get_logger().info('face detected, keep going')
+                self._rotate_180()
                 return
 
     # coordinate conversion
