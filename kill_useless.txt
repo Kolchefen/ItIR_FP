@@ -1,3 +1,5 @@
+Group 9 Code contribution
+
 lill0017@robotics10:~/final_proj$ pgrep -af 'ros2|rclcpp|component_container|rviz|turtlebot|rplidar|nav2|amcl|controller_server|planner_server|bt_navigator|lifecycle_manager'
 99945 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 5 --rmw-implementation rmw_fastrtps_cpp
 101406 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 3 --rmw-implementation rmw_fastrtps_cpp
