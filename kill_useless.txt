@@ -15,3 +15,5 @@ lill0017@robotics10:~/final_proj$ ../echo-ros.sh
 True
 
 lill0017@robotics10:~/final_proj$ pgrep -af 'ros2|rclcpp|component_container|rviz|turtlebot|rplidar|nav2|amcl|controller_server|planner_server|bt_navigator|lifecycle_manager'
+
+ros2 service call /stop_motor std_srvs/srv/Empty "{}"
